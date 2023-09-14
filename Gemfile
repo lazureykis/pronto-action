@@ -15,6 +15,7 @@ gem 'pronto-rubocop', '~> 0.11.0', require: false
 gem 'pronto-scss', '~> 0.11.0', require: false
 # gem 'pronto-slim_lint', require: false
 gem 'pronto-sorbet', require: false
+gem 'pronto-undercover', require: false
 
 # Rubocop Extentions
 # see https://docs.rubocop.org/rubocop/extensions.html
