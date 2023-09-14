@@ -4,10 +4,10 @@ ARG NODE_VERSION=18.17.1
 ARG YARN_VERSION=1.22.19
 
 # https://hub.docker.com/_/node
-FROM ${NODE_IMAGE} as nodejs
+FROM --platform=amd64 ${NODE_IMAGE} as nodejs
 
 # https://hub.docker.com/_/ruby
-FROM ruby:3.2.2-alpine3.18
+FROM --platform=amd64 ruby:3.2.2-alpine3.18
 ARG NODE_VERSION # stage local scope
 ARG YARN_VERSION # stage local scope
 # Install Node.js
@@ -30,18 +30,18 @@ COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN set -eux; \
     apk add --no-cache --virtual .ruby-builddeps \
-        alpine-sdk \
-        cmake \
-        openssl \
-        openssl-dev \
+    alpine-sdk \
+    cmake \
+    openssl \
+    openssl-dev \
     ; \
     bundle install --jobs 20 --retry 5 \
     ; \
     apk del --purge --no-network .ruby-builddeps \
     ; \
     apk add --no-cache \
-        jq \
-        git \
+    jq \
+    git \
     ;
 
 COPY entrypoint.sh entrypoint.sh
